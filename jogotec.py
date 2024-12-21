@@ -1,4 +1,5 @@
-from flask import Flask , render_template,request,redirect
+import flask
+from flask import Flask , render_template,request,redirect,session,flash
 
 class Jogo:
     def __init__(self,nome,categoria,console):
@@ -6,7 +7,10 @@ class Jogo:
         self.categoria = categoria
         self.console = console
 
-
+class usuario:
+    def __init__(self,login,senha):
+        self.login = login
+        self.senha  = senha
 
 
 
@@ -21,6 +25,7 @@ lista_jogos = [jogo1,jogo2,jogo3]
 
 
 app = Flask(__name__)
+app.secret_key = 'alessandro'
 @app.route('/inicio')
 def inicio():
 
@@ -43,6 +48,31 @@ def pergar_jogo():
     jogo = Jogo(name,categoria,console)
     lista_jogos.append(jogo)
     return redirect('/inicio')
+
+
+@app.route('/login' )
+def login():
+    return render_template("login.html")
+
+@app.route('/autenticar',methods=['POST','GET'] )
+def autenticar():
+    if "spale12" == request.form['senha']:
+        session['usuario'] = request.form['usuario']
+        flash(session['usuario'] + "Login sucesso")
+        return redirect('/inicio')
+        return redirect('/inicio')
+    else:
+        flask.flash("Usuario ou senha incorretos")
+        return redirect('/login')
+
+
+
+@app.route('/logout')
+def logout():
+    session['usuario'] = None
+    flash("Logout sucesso")
+    return redirect('/inicio')
+
 
 
 
