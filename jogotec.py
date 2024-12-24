@@ -63,10 +63,6 @@ class Usuarios(db.Model):
 
 
 
-
-
-
-
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -121,9 +117,20 @@ def autenticar():
             flash(usuario.nickname + ' logado com sucesso!')
             proxima_pagina = request.form['proxima']
             return redirect(proxima_pagina)
+        else:
+            flash('Usuário não logado.')
+            return redirect(url_for('login'))
+
     else:
         flash('Usuário não logado.')
         return redirect(url_for('login'))
+
+
+@app.route('/deletar')
+def deletar():
+    return render_template('del_game.html', titulo='Excluir Jogo')
+
+
 
 @app.route('/logout')
 def logout():
