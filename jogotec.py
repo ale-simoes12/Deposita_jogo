@@ -82,6 +82,37 @@ def inicio():
 def novo_jogo():
     return render_template('new_game.html', titulo='Novo Jogo')
 
+
+@app.route('/cadastro')
+def cadastro():
+    return render_template('Cadastro.html', titulo='Realizar Cadastramento')
+
+
+@app.route('/cadastrar', methods=['POST'])
+def cadastrar():
+    nome = request.form['nome']
+    nickname = request.form['nickname']
+    senha = request.form['senha']
+
+    if not nome or not nickname or not senha:
+        flash('Todos os campos são obrigatórios!')
+        return redirect(url_for('inicio'))
+
+    usuario = Usuarios.query.filter_by(nome=nome).first()
+    nick = Usuarios.query.filter_by(nickname=nickname).first()
+
+    if usuario or nick:
+        flash('Usuario ou Nickname ja existe!')
+        return redirect(url_for('inicio'))
+
+    novo_usuario = Usuarios(nome=nome, nickname=nickname, senha=senha)
+    db.session.add(novo_usuario)
+    db.session.commit()
+    flash('Usuario Cadastrado com sucesso!')
+
+    return redirect(url_for('inicio'))
+
+
 @app.route('/criar', methods=['POST'])
 def criar():
     nome = request.form['nome']
@@ -124,6 +155,9 @@ def autenticar():
     else:
         flash('Usuário não logado.')
         return redirect(url_for('login'))
+
+
+
 
 
 @app.route('/deletar')
