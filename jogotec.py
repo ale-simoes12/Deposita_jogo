@@ -127,8 +127,31 @@ def autenticar():
 
 
 @app.route('/deletar')
+@login_required
 def deletar():
-    return render_template('del_game.html', titulo='Excluir Jogo')
+    lista = Jogos.query.order_by(Jogos.id)
+    return render_template('del_game.html', titulo='Excluir Jogo', jogos=lista)
+
+
+
+
+@app.route('/apagar', methods=['POST'])
+def apagar():
+    nome = request.form['nome']
+
+    # Busca o jogo pelo nome
+    jogo = Jogos.query.filter_by(nome=nome).first()
+
+    if not jogo:
+        flash('Jogo não encontrado!')
+        return redirect(url_for('inicio'))
+
+    # Remove o jogo encontrado
+    db.session.delete(jogo)
+    db.session.commit()
+
+    flash('Jogo deletado com sucesso!')
+    return redirect(url_for('inicio'))
 
 
 
