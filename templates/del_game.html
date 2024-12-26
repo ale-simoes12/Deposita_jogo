@@ -1,7 +1,7 @@
 {% extends "template.html" %}
 {% block conteudo %}
 
-      <form action="{{ url_for('apagar') }}" method="post">
+      <form  action="{{ url_for('apagar') }}" method="post">
         <ul>
            {% for jogo in jogos %}
              <li>{{ jogo.nome }} - Categoria: {{ jogo.categoria }}</li>
@@ -15,13 +15,11 @@
             <option value="{{ jogo.nome }}">{{ jogo.nome }}</option>
           {% endfor %}
         </select>
-
-        <button type="submit" class="btn btn-primary btn-salvar">Deletar</button>
-        <button class="btn btn-primary btn-salvar" onclick="window.location.href='/cadastro'">Inicio</button>
-
-
-
-
+          <br>
+          <button   type="submit" class="btn btn-primary btn-salvar">Deletar</button>
 
       </form>
+
+
+        <button class="btn btn-primary btn-salvar" onclick="window.location.href='/inicio'">Inicio</button>
 {%endblock%}
