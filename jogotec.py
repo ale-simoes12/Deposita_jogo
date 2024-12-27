@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, redirect, session, flash, url_for
+import os
+
+from flask import Flask, render_template, request, redirect, session, flash, url_for,send_from_directory
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 
@@ -103,10 +105,6 @@ def atualizar():
 
 
 
-
-
-
-
 @app.route('/cadastro')
 def cadastro():
     return render_template('Cadastro.html', titulo='Realizar Cadastramento')
@@ -152,6 +150,12 @@ def criar():
     novo_jogo = Jogos(nome=nome, categoria=categoria, console=console)
     db.session.add(novo_jogo)
     db.session.commit()
+    arquivo = request.files['arquivo']
+    path = os.path.dirname(os.path.abspath(__file__)) + '/uploads/'
+    uploads_path = os.path.join(path)
+    print(uploads_path)
+    arquivo.save(f'{uploads_path}/capa{novo_jogo.id}.png')
+
 
     return redirect(url_for('inicio'))
 
@@ -211,6 +215,11 @@ def apagar():
     flash('Jogo deletado com sucesso!')
     return redirect(url_for('inicio'))
 
+
+
+@app.route('/uploads/<nome_arquivo>')
+def imagem(nome_arquivo):
+    return send_from_directory('uploads', nome_arquivo)
 
 
 @app.route('/logout')
