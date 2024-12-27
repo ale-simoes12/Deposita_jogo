@@ -83,6 +83,30 @@ def novo_jogo():
     return render_template('new_game.html', titulo='Novo Jogo')
 
 
+@app.route('/update/<int:id>')
+@login_required
+def update(id):
+    # Lógica para editar o jogo com o id fornecido
+    jogo = Jogos.query.filter_by(id=id).first()
+    return render_template('update.html', titulo='Editar Jogo', jogo=jogo)
+
+@app.route('/atualizar', methods=['POST'])
+def atualizar():
+    jogo  = Jogos.query.filter_by(id=request.form['id']).first()
+    jogo.nome = request.form['nome']
+    jogo.categoria = request.form['categoria']
+    jogo.console = request.form['console']
+    db.session.add(jogo)
+    db.session.commit()
+    return redirect(url_for('inicio'))
+
+
+
+
+
+
+
+
 @app.route('/cadastro')
 def cadastro():
     return render_template('Cadastro.html', titulo='Realizar Cadastramento')

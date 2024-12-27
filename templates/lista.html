@@ -6,6 +6,7 @@
                 <th>Nome</th>
                 <th>Categoria</th>
                 <th>Titulo</th>
+                <th>Atualizar Jogo</th>
             </tr>
         </thead>
         <tbody>
@@ -14,6 +15,7 @@
                <td>{{jogo.nome}}</td>
                <td>{{jogo.categoria}}</td>
                <td>{{jogo.console}}</td>
+               <td><a href="{{ url_for('update', id=jogo.id) }}"><button class="btn-editar">Editar</button></a></td>
            </tr>
         {% endfor %}
 
