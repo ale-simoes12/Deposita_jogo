@@ -109,10 +109,12 @@ def atualizar():
     arquivo = request.files['arquivo']
     path = os.path.dirname(os.path.abspath(__file__)) + '/uploads/'
     uploads_path = os.path.join(path)
-    print(uploads_path)
     current_time = time.time()
+    delete_path = f'capa{jogo.id}'
+    print("caminho para deletar: ", delete_path)
+    delete_image(delete_path)
+    arquivo.save(f'{uploads_path}/capa{jogo.id}-{current_time}.jpg')
 
-    arquivo.save(f'{uploads_path}/capa{jogo.id}-{current_time}.png')
     return redirect(url_for('inicio'))
 
 
@@ -250,7 +252,11 @@ def get_image(id):
             return os.path.join('uploads', nome_arquivo)
 
 
-
+def delete_image(caminho):
+    for nome_arquivo in os.listdir('uploads'):
+        if caminho in nome_arquivo:
+            os.remove(f'uploads/{nome_arquivo}')
+            print(f'removed: {caminho}')
 
 
 if __name__ == '__main__':
