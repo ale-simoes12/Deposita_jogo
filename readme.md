@@ -7,7 +7,7 @@ Jogoteca é um sistema de cadastro de jogos desenvolvido com Flask e MySQL. Este
 - **Visualização**: Visualizar jogos adicionados
 - **Editar Jogos**: Função de editar jogos
 
-![img_1.png](img_1.png)
+![img_3.png](img_3.png)
 
 - **Adicionar Jogos**: Função de adicionar jogos
 - **Excluir Jogos**: Função de deletar jogos
