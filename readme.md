@@ -27,7 +27,7 @@ Para configurar o ambiente de desenvolvimento, instale as dependências abaixo:
 
 
 
-### 3. Baixar o Pyhon
+### 3. Baixar o Python
 
 ```A versão usada do Python foi a 3.9.9```
 
