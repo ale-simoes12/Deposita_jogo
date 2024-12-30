@@ -22,15 +22,18 @@ Para configurar o ambiente de desenvolvimento, instale as dependências abaixo:
 
 
 
-### 2. Baixer o Pycharme PyCharm
+### 2. Baixar o  PyCharm
 ```A versão usada foi a 2024.3.1.1```
 
 
 
-### 3. Baixer o Pyhon
+### 3. Baixar o Pyhon
 
 ```A versão usada do Python foi a 3.9.9```
 
+### 3. Baixar o Mysql
+
+```A versão usada do Mysql foi a 8.0 CE```
 ## Dependências
 
 - **Flask**: 2.0.2
