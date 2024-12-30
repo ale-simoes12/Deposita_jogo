@@ -1,6 +1,10 @@
 {% extends "template.html" %}
 {% block conteudo %}
-      <table class="table table-striped table-responsive table-bordered">
+
+<br>
+<h2 class="titulo_capa">Tabela dos Jogos</h2>
+<br>
+      <table class="table table-striped table-responsive table-bordered" >
          <thead class="thead-default">
             <tr>
                 <th>Nome</th>
@@ -34,12 +38,19 @@
 
         </tbody>
      </table>
+
+
+
+<h2  class="titulo_capa" >Escolha Uma Opção</h2>
+<br>
+<div class="centro">
      <button onclick="window.location.href='/new_game'">Adicionar Jogo</button>
     <button onclick="window.location.href='/deletar'">Excluir Jogo</button>
     <button onclick="window.location.href='/logout'">Logout</button>
     <button onclick="window.location.href='/cadastro'">Cadastro</button>
 
-
-
+</div>
+<br>
+<br>
 
 {%endblock%}

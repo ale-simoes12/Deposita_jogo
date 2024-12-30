@@ -1,7 +1,3 @@
-body {
-    padding-top: 10px;
-}
-
 .btn {
     margin-bottom: 10px;
 }
@@ -43,6 +39,7 @@ figcaption {
 
 td {
     text-align: center;
+    background-color: white;
 }
 
 .formularioJogo {
@@ -73,3 +70,56 @@ td {
         height: 150px; /* Altura fixa */
         object-fit: cover; /* Ajusta a imagem ao tamanho mantendo proporção */
     }
+
+
+
+/* Centraliza os botões abaixo da tabela */
+.botao-container {
+    display: flex;
+    justify-content: center; /* Centraliza os botões horizontalmente */
+    margin-top: 20px; /* Espaço acima dos botões */
+}
+
+/* Estilo do botão */
+button {
+    background-color: #000; /* Fundo preto */
+    color: #fff; /* Texto branco */
+    padding: 12px 24px; /* Espaçamento interno */
+    border: none; /* Sem borda */
+    border-radius: 12px; /* Bordas arredondadas */
+    font-size: 16px; /* Tamanho do texto */
+    font-weight: bold; /* Texto em negrito */
+    text-transform: uppercase; /* Letras maiúsculas */
+    letter-spacing: 1px; /* Espaçamento entre letras */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra do botão */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    transition: all 0.3s ease-in-out; /* Animação de transição */
+}
+
+button:hover {
+    background-color: #444; /* Fundo ao passar o mouse */
+    transform: scale(1.05); /* Leve aumento no tamanho */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
+}
+
+button:active {
+    background-color: #222; /* Fundo ao clicar */
+    transform: scale(0.98); /* Leve redução no tamanho */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra reduzida */
+}
+
+/* Estilo da tabela */
+table {
+    width: 100%; /* Largura da tabela */
+    border-collapse: collapse; /* Para remover espaços entre as bordas das células */
+}
+
+th, td {
+    padding: 12px; /* Espaçamento interno das células */
+    text-align: left; /* Alinhamento do texto */
+    border: 1px solid #ddd; /* Cor da borda da tabela */
+}
+
+th {
+    background-color: #f4f4f4; /* Cor do cabeçalho */
+}

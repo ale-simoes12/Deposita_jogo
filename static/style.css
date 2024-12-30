@@ -12,3 +12,14 @@
 .btn-editar:hover {
     background-color: #45a049;
 }
+
+.titulo_capa{
+
+    text-align: center;
+    color: black;
+}
+
+.centro{
+    justify-content: center;
+    margin-left: 250px;
+}
