@@ -7,6 +7,7 @@
                 <th>Categoria</th>
                 <th>Titulo</th>
                 <th>Atualizar Jogo</th>
+                <th>Capa do Jogo</th>
             </tr>
         </thead>
         <tbody>
@@ -15,6 +16,18 @@
                <td>{{jogo.nome}}</td>
                <td>{{jogo.categoria}}</td>
                <td>{{jogo.console}}</td>
+               <td>{{jogo.id}}</td>
+               <td>
+                {% set id_image = 'capa' ~ jogo.id %}
+                {% for image in imagens %}
+                    {% if id_image in image %}
+                        <img class="img-tamanho-fixo" src="{{ url_for('imagem', nome_arquivo=image) }}" alt="Imagem do jogo {{ image }}">
+                    {% endif %}
+                {% endfor %}
+               </td>
+
+
+
                <td><a href="{{ url_for('update', id=jogo.id) }}"><button class="btn-editar">Editar</button></a></td>
            </tr>
         {% endfor %}

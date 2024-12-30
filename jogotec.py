@@ -80,7 +80,10 @@ def login_required(f):
 def inicio():
     lista = Jogos.query.order_by(Jogos.id)
 
-    return render_template('lista.html', title='Jogos', jogos=lista)
+    imagens = listar_imagens()
+    print(imagens)
+
+    return render_template('lista.html', title='Jogos', jogos=lista, imagens=imagens)
 
 @app.route('/new_game')
 @login_required
@@ -257,6 +260,24 @@ def delete_image(caminho):
         if caminho in nome_arquivo:
             os.remove(f'uploads/{nome_arquivo}')
             print(f'removed: {caminho}')
+
+def listar_imagens():
+    uploads_dir = 'uploads'
+    lista_imagens = []
+
+    try:
+        for nome_arquivo in os.listdir(uploads_dir):
+            if nome_arquivo.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff', '.webp')):
+                lista_imagens.append(nome_arquivo)
+        print(f'Imagens encontradas: {lista_imagens}')
+        return lista_imagens
+    except FileNotFoundError:
+        print(f'Diretório {uploads_dir} não encontrado.')
+        return []
+    except Exception as e:
+        print(f'Erro ao listar imagens: {e}')
+        return []
+
 
 
 if __name__ == '__main__':
