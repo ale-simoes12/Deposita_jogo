@@ -1,8 +1,11 @@
 import os
-
+import time
+from pathlib import Path
 from flask import Flask, render_template, request, redirect, session, flash, url_for,send_from_directory
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
+
+
 
 # class Jogo:
 #     def __init__(self, nome, categoria, console):
@@ -90,7 +93,10 @@ def novo_jogo():
 def update(id):
     # Lógica para editar o jogo com o id fornecido
     jogo = Jogos.query.filter_by(id=id).first()
-    return render_template('update.html', titulo='Editar Jogo', jogo=jogo)
+    capa_jogo  = get_image(id)
+    capa_jogo = Path(capa_jogo).relative_to('uploads')
+    print("Caminho da capa do jogo sem 'uploads/':", capa_jogo)
+    return render_template('update.html', titulo='Editar Jogo', jogo=jogo, capa_jogo=capa_jogo)
 
 @app.route('/atualizar', methods=['POST'])
 def atualizar():
@@ -100,6 +106,13 @@ def atualizar():
     jogo.console = request.form['console']
     db.session.add(jogo)
     db.session.commit()
+    arquivo = request.files['arquivo']
+    path = os.path.dirname(os.path.abspath(__file__)) + '/uploads/'
+    uploads_path = os.path.join(path)
+    print(uploads_path)
+    current_time = time.time()
+
+    arquivo.save(f'{uploads_path}/capa{jogo.id}-{current_time}.png')
     return redirect(url_for('inicio'))
 
 
@@ -154,7 +167,9 @@ def criar():
     path = os.path.dirname(os.path.abspath(__file__)) + '/uploads/'
     uploads_path = os.path.join(path)
     print(uploads_path)
-    arquivo.save(f'{uploads_path}/capa{novo_jogo.id}.png')
+    current_time = time.time()
+
+    arquivo.save(f'{uploads_path}/capa{novo_jogo.id}-{current_time}.jpg')
 
 
     return redirect(url_for('inicio'))
@@ -227,6 +242,16 @@ def logout():
     session['usuario_logado'] = None
     flash("Logout realizado com sucesso")
     return redirect(url_for('login'))
+
+def get_image(id):
+    for nome_arquivo in os.listdir('uploads'):
+        if f'capa{id}' in nome_arquivo:
+            print(f'capa{id}: {nome_arquivo}')
+            return os.path.join('uploads', nome_arquivo)
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
